@@ -1,0 +1,1 @@
+export enum LogType {INFO='info', DEBUG='debug', ERROR='error', WARN='warn' }

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var LogParser_1 = require("./classes/LogParser");
+var LogType_1 = require("./enums/LogType");
+var _a = process.argv, inputCommand = _a[2], inputFile = _a[3], outputCommand = _a[4], outputFile = _a[5];
+console.log("inputCommand: ", inputCommand);
+console.log("inputFile: ", inputFile);
+console.log("outputCommand: ", outputCommand);
+console.log("outputFile: ", outputFile);
+var errorParser = new LogParser_1.default(inputCommand, inputFile, outputCommand, outputFile, LogType_1.LogType.ERROR);
+// const debugParser: LogParser = new LogParser(inputCommand, inputFile, outputCommand, outputFile, LogType.DEBUG);
+// const infoParser: LogParser = new LogParser(inputCommand, inputFile, outputCommand, outputFile, LogType.INFO);
+// const warnParser: LogParser = new LogParser(inputCommand, inputFile, outputCommand, outputFile, LogType.WARN);
