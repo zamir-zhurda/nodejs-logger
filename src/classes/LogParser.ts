@@ -61,6 +61,8 @@ export default class LogParser
               const values = line.split(splitter);
               let dateToBeParsed = values[0];   
 
+              const [, ...messageParts] = values;
+              const message = messageParts.join(splitter);   
             //#region using if statements
             //   if(logType == LogType.ERROR)
             //  {
@@ -124,7 +126,7 @@ export default class LogParser
 
              switch (logType) {
               case LogType.ERROR:
-                let iErrorLog: IErrorLog = values[1] && JSON.parse(values[1]);
+                let iErrorLog: IErrorLog = message && JSON.parse(message);
                 let errorLog: ErrorLog;
                 errorLog = new ErrorLog(convertToEpoch(dateToBeParsed), LogType.ERROR, iErrorLog.transactionId, iErrorLog.err)
                 if(lineNumber == 0) {
@@ -139,7 +141,7 @@ export default class LogParser
                 break;
 
               case LogType.DEBUG:
-                let iDebugLog: IDebugLog = values[1] && JSON.parse(values[1]);
+                let iDebugLog: IDebugLog = message && JSON.parse(message);
                 let debugLog: DebugLog;
                 debugLog = new DebugLog(convertToEpoch(dateToBeParsed), LogType.DEBUG, iDebugLog.transactionId, iDebugLog.details, iDebugLog.userId, iDebugLog.user)
                 if(lineNumber == 0) {
@@ -154,7 +156,7 @@ export default class LogParser
                 break;
 
               case LogType.INFO:
-                  let iInfoLog: IInfoLog = values[1] && JSON.parse(values[1]);
+                  let iInfoLog: IInfoLog = message && JSON.parse(message);
                   let infoLog: InfoLog;
                   infoLog = new InfoLog(convertToEpoch(dateToBeParsed), LogType.INFO, iInfoLog.transactionId, iInfoLog.details)
                   if(lineNumber == 0) {
@@ -169,7 +171,7 @@ export default class LogParser
                  break;
 
               case LogType.WARN:
-              let iWarnLog: IWarnLog = values[1] && JSON.parse(values[1]);
+              let iWarnLog: IWarnLog = message && JSON.parse(message);
               let warnLog: WarnLog;
               warnLog = new WarnLog(convertToEpoch(dateToBeParsed), LogType.WARN, iWarnLog.transactionId, iWarnLog.details, iWarnLog.code, iWarnLog.err)
              
